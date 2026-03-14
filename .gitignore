@@ -1,0 +1,9 @@
+.metadata/
+.plugins/
+.settings/
+.lock
+*.log
+*.log4j2.xml
+version.ini
+Debug/
+Release/
