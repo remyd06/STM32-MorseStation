@@ -22,7 +22,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "globals_var.h"
 #include "task_uart.h"
+#include "task_print.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -117,6 +119,8 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
+  xQueueUart = xQueueCreate(64, sizeof(uint8_t));
+  xQueuePrint = xQueueCreate(64, sizeof(char));
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
@@ -125,6 +129,8 @@ int main(void)
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   xTaskCreate(task_uart, "UART", 256, NULL, 4, NULL);
+  xTaskCreate(task_print, "UART", 256, NULL, 5, NULL);
+//  xTaskCreate(task_print, "PRINT", 128, NULL, 4, NULL);
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */

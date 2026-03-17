@@ -7,12 +7,17 @@
 
 #include "globals_var.h"
 
-state_t gState = {OFF, UNLOGGED, 150, {{0},{0},{0}}};
+state_t gState = {OFF, UNLOGGED, 150, {{0},{0},{150}}};
 
-SemaphoreHandle_t	xMutexPrint;
 SemaphoreHandle_t	xMutexStruct;
+
 SemaphoreHandle_t	xSemaphoreButton;
-SemaphoreHandle_t	xSemaphoreUart;
+
+QueueHandle_t		xQueueUart;
+QueueHandle_t		xQueuePrint;
+
+volatile uint8_t	uart_queue_overflow_flag = 0;
+volatile uint8_t 	rx_byte_it = 0;
 
 
 

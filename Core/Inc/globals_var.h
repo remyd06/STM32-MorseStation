@@ -11,6 +11,9 @@
 # include "FreeRTOS.h"
 # include "semphr.h"
 # include <string.h>
+# include <stdlib.h>
+# include <ctype.h>
+# include <stdio.h>
 
 typedef	enum
 {
@@ -36,9 +39,14 @@ typedef	struct
 
 extern state_t				gState;
 
-extern SemaphoreHandle_t	xMutexPrint;
 extern SemaphoreHandle_t	xMutexStruct;
+
 extern SemaphoreHandle_t	xSemaphoreButton;
-extern SemaphoreHandle_t	xSemaphoreUart;
+
+extern QueueHandle_t		xQueueUart;
+extern QueueHandle_t		xQueuePrint;
+
+extern volatile uint8_t		uart_queue_overflow_flag;
+extern volatile uint8_t 	rx_byte_it;
 
 #endif /* INC_GLOBALS_VAR_H_ */
