@@ -33,7 +33,7 @@ void	task_print(void *argument)
 	for (;;)
 	{
 		set_buffer_print(rx_buffer);
-		printf(rx_buffer);
+		HAL_UART_Transmit(&huart2, (uint8_t*)rx_buffer, strlen(rx_buffer), HAL_MAX_DELAY);;
 		memset(rx_buffer, 0, sizeof(rx_buffer));
 	}
 }
