@@ -20,6 +20,7 @@ QueueHandle_t		xQueueUart;
 QueueHandle_t		xQueuePrint;
 QueueHandle_t		xQueueEncoder;
 
+volatile uint8_t	encoder_queue_overflow_flag = 0;
 volatile uint8_t	uart_queue_overflow_flag = 0;
 volatile uint8_t 	rx_byte_it = 0;
 

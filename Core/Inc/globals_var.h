@@ -9,6 +9,7 @@
 #define INC_GLOBALS_VAR_H_
 
 # include "FreeRTOS.h"
+# include "cmsis_os.h"
 # include "semphr.h"
 # include "main.h"
 # include <string.h>
@@ -51,6 +52,7 @@ extern QueueHandle_t		xQueueUart;
 extern QueueHandle_t		xQueuePrint;
 extern QueueHandle_t		xQueueEncoder;
 
+extern volatile uint8_t		encoder_queue_overflow_flag;
 extern volatile uint8_t		uart_queue_overflow_flag;
 extern volatile uint8_t 	rx_byte_it;
 

@@ -25,6 +25,7 @@
 #include "globals_var.h"
 #include "task_uart.h"
 #include "task_print.h"
+#include "task_encoder.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -126,9 +127,9 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
-  xTaskCreate(task_uart, "UART", 256, NULL, 4, NULL);
-  xTaskCreate(task_print, "UART", 256, NULL, 5, NULL);
-//  xTaskCreate(task_print, "PRINT", 128, NULL, 4, NULL);
+  xTaskCreate(task_uart, "UART", 256, NULL, 6, NULL);
+  xTaskCreate(task_print, "PRINT", 256, NULL, 7, NULL);
+  xTaskCreate(task_encoder, "ENCODER", 256, NULL, 5, NULL);
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
