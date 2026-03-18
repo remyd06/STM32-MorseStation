@@ -43,7 +43,6 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-UART_HandleTypeDef huart2;
 
 /* Definitions for defaultTask */
 /* USER CODE BEGIN PV */
@@ -61,11 +60,7 @@ static void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-int __io_putchar(int ch)
-{
-    HAL_UART_Transmit(&huart2, (uint8_t*)&ch, 1, HAL_MAX_DELAY);
-    return ch;
-}
+
 /* USER CODE END 0 */
 
 /**
@@ -107,6 +102,8 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
+  xMutexPrint = xSemaphoreCreateMutex();
+  xMutexStruct = xSemaphoreCreateMutex();
   /* USER CODE END RTOS_MUTEX */
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
@@ -121,6 +118,7 @@ int main(void)
   /* add queues, ... */
   xQueueUart = xQueueCreate(64, sizeof(uint8_t));
   xQueuePrint = xQueueCreate(64, sizeof(char));
+  xQueueEncoder = xQueueCreate(64, sizeof(char));
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
