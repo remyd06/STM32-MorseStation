@@ -10,6 +10,7 @@
 
 # include "FreeRTOS.h"
 # include "semphr.h"
+# include "main.h"
 # include <string.h>
 # include <stdlib.h>
 # include <ctype.h>
@@ -39,12 +40,16 @@ typedef	struct
 
 extern state_t				gState;
 
+extern UART_HandleTypeDef	huart2;
+
 extern SemaphoreHandle_t	xMutexStruct;
+extern SemaphoreHandle_t	xMutexPrint;
 
 extern SemaphoreHandle_t	xSemaphoreButton;
 
 extern QueueHandle_t		xQueueUart;
 extern QueueHandle_t		xQueuePrint;
+extern QueueHandle_t		xQueueEncoder;
 
 extern volatile uint8_t		uart_queue_overflow_flag;
 extern volatile uint8_t 	rx_byte_it;
