@@ -23,8 +23,8 @@ void	HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
 void	set_buffer(char *rx_buffer)
 {
-    size_t	rx_index = 0;
     uint8_t rx_byte = 0;
+    size_t	rx_index = 0;
 
     while (1)
     {
@@ -132,8 +132,8 @@ void	power_and_logger()
 
 void	set_buffer_it(char *rx_buffer)
 {
-	size_t	rx_byte = 0;
-	uint8_t	rx_index = 0;
+	uint8_t	rx_byte = 0;
+	size_t	rx_index = 0;
 
 	while (1)
 	{
@@ -180,7 +180,6 @@ void	task_uart(void *argument)
 	char	rx_buffer[64];
 	for (;;)
 	{
-
 		HAL_UART_Receive_IT(&huart2, (uint8_t *)&rx_byte_it, 1);
 		set_buffer_it(rx_buffer);
 
@@ -199,7 +198,7 @@ void	task_uart(void *argument)
 					char	cmd[strlen((rx_buffer) - 7)];
 
 					strcpy(cmd, &rx_buffer[7]);
-					if ((atoi(cmd) >= 75 && atoi(cmd) <= 350))
+					if ((atoi(cmd) >= 25 && atoi(cmd) <= 350))
 					{
 						xSemaphoreTake(xMutexStruct, portMAX_DELAY);
 
@@ -208,11 +207,11 @@ void	task_uart(void *argument)
 						xSemaphoreGive(xMutexStruct);
 					}
 					else
-						vSendToPrintTask("[ERROR] SPEED MUST BE BETWEEN 75ms and 350ms.\r\n");
+						vSendToPrintTask("[ERROR] SPEED MUST BE BETWEEN 25ms and 350ms.\r\n");
 
 				}
 				else
-					vSendToPrintTask("[ERROR] SPEED MUST BE BETWEEN 75ms and 350ms.\r\n");
+					vSendToPrintTask("[ERROR] SPEED MUST BE BETWEEN 25ms and 350ms.\r\n");
 			}
 			else
 				vSendToPrintTask("[ERROR] UNKNOWN COMMAND.\r\n");
@@ -220,12 +219,12 @@ void	task_uart(void *argument)
 		else
 		{
 			size_t	i = 0;
-			vSendToPrintTask("rx_buffer -> ");
-			vSendToPrintTask(rx_buffer);
+
+			i = 0;
 			while (rx_buffer[i])
 			{
-				if (!isalnum((unsigned char)rx_buffer[i]))
-					vSendToPrintTask("[ERROR] YOUR COMMAND CAN ONLY CONTAIN ALPHANUMERIC CHAR.\r\n");                         //naffche plus rien aucune commande envoi de print. a tester avec HAL transmit
+				if (rx_buffer[i] >= 97 && rx_buffer[i] <= 122)
+					rx_buffer[i] -= 32;
 				i++;
 			}
 

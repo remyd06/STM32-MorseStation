@@ -9,7 +9,6 @@
 #define INC_TASK_UART_H_
 
 # include "globals_var.h"
-# include "utils.h"
 # include "main.h"
 
 void task_uart(void *argument);
