@@ -26,6 +26,7 @@
 #include "task_uart.h"
 #include "task_print.h"
 #include "task_encoder.h"
+#include "task_led_and_speaker.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -120,6 +121,9 @@ int main(void)
   xQueueUart = xQueueCreate(64, sizeof(uint8_t));
   xQueuePrint = xQueueCreate(64, sizeof(char));
   xQueueEncoder = xQueueCreate(64, sizeof(char));
+  xQueueLedAndSpeaker = xQueueCreate(64, sizeof(char));
+
+
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
@@ -127,9 +131,10 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
-  xTaskCreate(task_uart, "UART", 256, NULL, 6, NULL);
-  xTaskCreate(task_print, "PRINT", 256, NULL, 7, NULL);
-  xTaskCreate(task_encoder, "ENCODER", 256, NULL, 5, NULL);
+  xTaskCreate(task_uart, "UART", 256, NULL, 7, NULL);
+  xTaskCreate(task_print, "PRINT", 256, NULL, 5, NULL);
+  xTaskCreate(task_encoder, "ENCODER", 256, NULL, 6, NULL);
+  xTaskCreate(task_led_and_speaker, "LEDANDSPEAKER", 256, NULL, 8, NULL);
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */

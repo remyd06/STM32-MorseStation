@@ -12,6 +12,7 @@
 # include "cmsis_os.h"
 # include "semphr.h"
 # include "main.h"
+# include "utils.h"
 # include <string.h>
 # include <stdlib.h>
 # include <ctype.h>
@@ -51,8 +52,8 @@ extern SemaphoreHandle_t	xSemaphoreButton;
 extern QueueHandle_t		xQueueUart;
 extern QueueHandle_t		xQueuePrint;
 extern QueueHandle_t		xQueueEncoder;
+extern QueueHandle_t		xQueueLedAndSpeaker;
 
-extern volatile uint8_t		encoder_queue_overflow_flag;
 extern volatile uint8_t		uart_queue_overflow_flag;
 extern volatile uint8_t 	rx_byte_it;
 
