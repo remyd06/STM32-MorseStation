@@ -232,6 +232,9 @@ void	task_uart(void *argument)
 			while (rx_buffer[i])
 				xQueueSend(xQueueEncoder, &rx_buffer[i++], portMAX_DELAY);
 			xQueueSend(xQueueEncoder, &rx_buffer[i], portMAX_DELAY);
+
+			if (gLedAndSpeakerRunning)
+				xTaskNotify(xTaskLedAndSpeakerHandle, 0, eNoAction);
 		}
 
 		memset(rx_buffer, 0, 64);

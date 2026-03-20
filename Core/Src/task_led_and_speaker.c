@@ -45,6 +45,7 @@ void	task_led_and_speaker(void *argument)
 	{
 		size_t		encoded_index = 0;
 		size_t		encoded_index_line = 0;
+		gLedAndSpeakerRunning = 1;
 
 
 		while (encoded_buffer[encoded_index_line][0])
@@ -70,7 +71,7 @@ void	task_led_and_speaker(void *argument)
 					osDelay(gState.SPEED);
 				}
 				else
-					osDelay(gState.SPEED * 4);
+					osDelay(gState.SPEED * 4); // si espace je sors de la boucle donc ca plus delai 3 = 7
 
 				osDelay(gState.SPEED);
 				encoded_index++;
@@ -80,7 +81,11 @@ void	task_led_and_speaker(void *argument)
 			encoded_index_line++;
 		}
 		osDelay(gState.SPEED * 7);
-//		memset(encoded_buffer, 0, sizeof(encoded_buffer));
 
+		if (xTaskNotifyWait(0, 0, NULL, 0) == pdTRUE)
+		{
+		    memset(encoded_buffer, 0, sizeof(encoded_buffer));
+		    set_buffer_led_and_speaker(encoded_buffer);
+		}
 	}
 }

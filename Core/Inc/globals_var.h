@@ -44,6 +44,8 @@ extern state_t				gState;
 
 extern UART_HandleTypeDef	huart2;
 
+extern TaskHandle_t			xTaskLedAndSpeakerHandle;
+
 extern SemaphoreHandle_t	xMutexStruct;
 extern SemaphoreHandle_t	xMutexPrint;
 
@@ -54,6 +56,7 @@ extern QueueHandle_t		xQueuePrint;
 extern QueueHandle_t		xQueueEncoder;
 extern QueueHandle_t		xQueueLedAndSpeaker;
 
+extern volatile uint8_t		gLedAndSpeakerRunning;
 extern volatile uint8_t		uart_queue_overflow_flag;
 extern volatile uint8_t 	rx_byte_it;
 

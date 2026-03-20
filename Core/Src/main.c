@@ -134,7 +134,7 @@ int main(void)
   xTaskCreate(task_uart, "UART", 256, NULL, 7, NULL);
   xTaskCreate(task_print, "PRINT", 256, NULL, 5, NULL);
   xTaskCreate(task_encoder, "ENCODER", 256, NULL, 6, NULL);
-  xTaskCreate(task_led_and_speaker, "LEDANDSPEAKER", 256, NULL, 8, NULL);
+  xTaskCreate(task_led_and_speaker, "LEDANDSPEAKER", 256, NULL, 6, &xTaskLedAndSpeakerHandle);
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */

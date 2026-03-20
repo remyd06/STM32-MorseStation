@@ -11,6 +11,8 @@ state_t gState = {OFF, UNLOGGED, 50, {{0},{0},{0}}};
 
 UART_HandleTypeDef	huart2;
 
+TaskHandle_t		xTaskLedAndSpeakerHandle;
+
 SemaphoreHandle_t	xMutexStruct;
 SemaphoreHandle_t	xMutexPrint;
 
@@ -21,6 +23,7 @@ QueueHandle_t		xQueuePrint;
 QueueHandle_t		xQueueEncoder;
 QueueHandle_t		xQueueLedAndSpeaker;
 
+volatile uint8_t	gLedAndSpeakerRunning = 0;
 volatile uint8_t	uart_queue_overflow_flag = 0;
 volatile uint8_t 	rx_byte_it = 0;
 
