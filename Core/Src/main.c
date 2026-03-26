@@ -27,6 +27,7 @@
 #include "task_print.h"
 #include "task_encoder.h"
 #include "task_led_and_speaker.h"
+#include "task_button.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -110,6 +111,7 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
+  xSemaphoreButton = xSemaphoreCreateBinary();
   /* USER CODE END RTOS_SEMAPHORES */
 
   /* USER CODE BEGIN RTOS_TIMERS */
@@ -135,6 +137,7 @@ int main(void)
   xTaskCreate(task_print, "PRINT", 256, NULL, 5, NULL);
   xTaskCreate(task_encoder, "ENCODER", 256, NULL, 6, NULL);
   xTaskCreate(task_led_and_speaker, "LEDANDSPEAKER", 256, NULL, 6, &xTaskLedAndSpeakerHandle);
+  xTaskCreate(task_button, "BUTTON", 256, NULL, 4, NULL);
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
