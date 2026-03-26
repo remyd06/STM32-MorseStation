@@ -1,8 +1,13 @@
-/*
- * task_led_and_speaker.h
+/**
+ * @file    task_led_and_speaker.h
+ * @brief   Public interface for the LED and speaker task.
  *
- *  Created on: 20 mars 2026
- *      Author: remyd
+ * @details Exposes task_led_and_speaker() entry point.
+ *          Plays morse sequences received from xQueueLedAndSpeaker
+ *          on the onboard LEDs and speaker.
+ *
+ * @author  remyd
+ * @date    20 mars 2026
  */
 
 #ifndef INC_TASK_LED_AND_SPEAKER_H_
