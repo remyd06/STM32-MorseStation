@@ -148,11 +148,11 @@ int main(void)
    *   task_print          : 5  — serializes all UART transmissions.
    *   task_button         : 4  — lowest, displays system state on button press. */
 
-  xTaskCreate(task_uart, "UART", 256, NULL, 7, NULL);
-  xTaskCreate(task_print, "PRINT", 256, NULL, 5, NULL);
+  xTaskCreate(task_uart, "UART", 128, NULL, 7, NULL);
+  xTaskCreate(task_print, "PRINT", 128, NULL, 5, NULL);
   xTaskCreate(task_encoder, "ENCODER", 256, NULL, 6, NULL);
   xTaskCreate(task_led_and_speaker, "LEDANDSPEAKER", 256, NULL, 6, &xTaskLedAndSpeakerHandle);
-  xTaskCreate(task_button, "BUTTON", 256, NULL, 4, NULL);
+  xTaskCreate(task_button, "BUTTON", 128, NULL, 4, NULL);
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
