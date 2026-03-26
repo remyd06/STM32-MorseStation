@@ -1,8 +1,12 @@
-/*
- * utlils.h
+/**
+ * @file    utils.h
+ * @brief   Public interface for shared utility functions.
  *
- *  Created on: 17 mars 2026
- *      Author: remyd
+ * @details Exposes vSendToPrintTask() — the only sanctioned way to transmit
+ *          strings over UART from any task.
+ *
+ * @author  remyd
+ * @date    17 mars 2026
  */
 
 #ifndef INC_UTILS_H_
