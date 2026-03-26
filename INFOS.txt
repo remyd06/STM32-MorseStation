@@ -1,2 +1,0 @@
-- config free rtos dans mx explique les tickrate et la heapsize toale
-- explique que dans sys, pour le systeme de systick tu as pris tim6 pour laisser systick a freertos
