@@ -281,8 +281,6 @@ void task_uart(void *argument)
 		HAL_UART_Receive_IT(&huart2, (uint8_t *)&rx_byte_it, 1);
 		set_buffer_it(rx_buffer);
 
-		set_buffer_it(rx_buffer);
-
 		/* If set_buffer_it returns an empty buffer, restart the loop. */
 		if (!rx_buffer[0])
 		    continue;
