@@ -1,8 +1,12 @@
-/*
- * task_uart.h
+/**
+ * @file    task_uart.h
+ * @brief   Public interface for the UART task.
  *
- *  Created on: 14 mars 2026
- *      Author: remyd
+ * @details Exposes task_uart() entry point.
+ *          Includes all dependencies required by the task.
+ *
+ * @author  remyd
+ * @date    14 mars 2026
  */
 
 #ifndef INC_TASK_UART_H_
