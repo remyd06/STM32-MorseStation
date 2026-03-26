@@ -45,9 +45,9 @@ void	task_led_and_speaker(void *argument)
 	{
 		size_t		encoded_index = 0;
 		size_t		encoded_index_line = 0;
+
+
 		gLedAndSpeakerRunning = 1;
-
-
 		while (encoded_buffer[encoded_index_line][0])
 		{
 			while (encoded_buffer[encoded_index_line][encoded_index])
