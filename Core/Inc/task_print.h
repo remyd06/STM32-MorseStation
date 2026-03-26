@@ -1,8 +1,12 @@
-/*
- * task_print.h
+/**
+ * @file    task_print.h
+ * @brief   Public interface for the print task.
  *
- *  Created on: 14 mars 2026
- *      Author: remyd
+ * @details Exposes task_print() entry point.
+ *          All UART transmissions must go through this task via vSendToPrintTask().
+ *
+ * @author  remyd
+ * @date    14 mars 2026
  */
 
 #ifndef INC_TASK_PRINT_H_
