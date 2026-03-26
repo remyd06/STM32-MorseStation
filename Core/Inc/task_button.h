@@ -15,6 +15,10 @@
 
 # include "globals_var.h"
 
-void	task_button(void *argument);
+#define	DEBOUNCE_DELAY 50
+
+void task_button(void *argument);
+
+extern volatile uint32_t	last_press_tick;
 
 #endif /* INC_TASK_BUTTON_H_ */

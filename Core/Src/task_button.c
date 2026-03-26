@@ -2,7 +2,8 @@
  * @file    task_button.c
  * @brief   Button task — displays system state on B1 press.
  *
- * @details Pressing B1 (PC13) triggers an EXTI ISR which gives xSemaphoreButton.
+ * @details Pressing B1 (PC13) trigger an EXTI ISR which gives xSemaphoreButton.
+ * 			A debouncer is here to avoid parasite push.
  *          task_button waits on this semaphore and prints the current system state
  *          via vSendToPrintTask() under mutex protection.
  *
@@ -19,10 +20,14 @@
 
 #include "task_button.h"
 
+/* Timestamp of the last button press — used for debouncing and timing in EXTI context */
+volatile uint32_t	last_press_tick = 0;
+
 /**
  * @brief  EXTI ISR callback — triggered on B1 falling edge (PC13).
  *
- * @details Gives xSemaphoreButton to wake task_button.
+ * @details	Check if the push is higher than DEBOUNCE_DELAY.
+ * 			Gives xSemaphoreButton to wake task_button.
  *          Only fires if the system is ON and the user is LOGGED.
  *          Yields immediately if a higher-priority task was woken.
  *
@@ -32,10 +37,15 @@ void	HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	if (GPIO_Pin == GPIO_PIN_13 && gState.STATE == ON && gState.LOGIN == LOGGED)
 	{
-		BaseType_t	xHigherPriorityTaskWoken = pdFALSE;
+		uint32_t now = HAL_GetTick();
+		if ((now - last_press_tick) > DEBOUNCE_DELAY)
+		{
+			last_press_tick = now;
+			BaseType_t	xHigherPriorityTaskWoken = pdFALSE;
 
-		xSemaphoreGiveFromISR(xSemaphoreButton, &xHigherPriorityTaskWoken);
-		portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+			xSemaphoreGiveFromISR(xSemaphoreButton, &xHigherPriorityTaskWoken);
+			portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+		}
 	}
 }
 

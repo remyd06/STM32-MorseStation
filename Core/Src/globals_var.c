@@ -35,6 +35,6 @@ QueueHandle_t		xQueueEncoder;      /* task_uart -> task_encoder : plain text.   
 QueueHandle_t		xQueueLedAndSpeaker;/* task_encoder -> task_led_and_speaker : morse. */
 
 /* Volatile for always reading — written by ISR, read by tasks. */
-volatile uint8_t	gLedAndSpeakerRunning    = 0; /* Set when task_led_and_speaker has started transmitting. */
-volatile uint8_t	uart_queue_overflow_flag = 0; /* Set by ISR when xQueueUart is full.                    */
-volatile uint8_t	rx_byte_it               = 0; /* Staging byte for HAL_UART_Receive_IT.                  */
+volatile uint8_t	gLedAndSpeakerRunning    = 0; /* Set when task_led_and_speaker has started transmitting.     */
+volatile uint8_t	uart_queue_overflow_flag = 0; /* Set by ISR when xQueueUart is full.                         */
+volatile uint8_t	rx_byte_it               = 0; /* Staging byte for HAL_UART_Receive_IT.                       */

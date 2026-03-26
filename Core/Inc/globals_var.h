@@ -30,6 +30,8 @@
 # include <ctype.h>
 # include <stdio.h>
 
+#define	DEBOUNCE_DELAY 50
+
 typedef enum
 {
     OFF = 0,
@@ -58,24 +60,24 @@ typedef struct
     char     HISTORIC[3][64];
 }	state_t;
 
-extern state_t            gState;
+extern state_t            	gState;
 
-extern UART_HandleTypeDef huart2;
+extern UART_HandleTypeDef 	huart2;
 
-extern TaskHandle_t       xTaskLedAndSpeakerHandle;
+extern TaskHandle_t       	xTaskLedAndSpeakerHandle;
 
-extern SemaphoreHandle_t  xMutexStruct;
-extern SemaphoreHandle_t  xMutexPrint;
+extern SemaphoreHandle_t  	xMutexStruct;
+extern SemaphoreHandle_t  	xMutexPrint;
 
-extern SemaphoreHandle_t  xSemaphoreButton;
+extern SemaphoreHandle_t  	xSemaphoreButton;
 
-extern QueueHandle_t      xQueueUart;
-extern QueueHandle_t      xQueuePrint;
-extern QueueHandle_t      xQueueEncoder;
-extern QueueHandle_t      xQueueLedAndSpeaker;
+extern QueueHandle_t      	xQueueUart;
+extern QueueHandle_t      	xQueuePrint;
+extern QueueHandle_t      	xQueueEncoder;
+extern QueueHandle_t      	xQueueLedAndSpeaker;
 
-extern volatile uint8_t   gLedAndSpeakerRunning;
-extern volatile uint8_t   uart_queue_overflow_flag;
-extern volatile uint8_t   rx_byte_it;
+extern volatile uint8_t   	gLedAndSpeakerRunning;
+extern volatile uint8_t   	uart_queue_overflow_flag;
+extern volatile uint8_t   	rx_byte_it;
 
 #endif /* INC_GLOBALS_VAR_H_ */
