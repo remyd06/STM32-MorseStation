@@ -50,6 +50,9 @@
 /* Definitions for defaultTask */
 /* USER CODE BEGIN PV */
 
+/* All global variables are defined and initialized in globals_var.c.
+ * See globals_var.h for the full list and documentation.         */
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -98,6 +101,10 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
+  /* == FreeRTOS primitives initialization ==
+   * Mutexes, semaphores and queues must be created before osKernelStart().
+   * Task handles are stored in globals_var for inter-task communication.  */
+
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -133,6 +140,14 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
+
+  /* == Task priority map ==
+   *   task_uart           : 7  — highest, drives the whole pipeline.
+   *   task_encoder        : 6  — encodes morse, feeds task_led_and_speaker.
+   *   task_led_and_speaker: 6  — plays morse on LEDs and speaker.
+   *   task_print          : 5  — serializes all UART transmissions.
+   *   task_button         : 4  — lowest, displays system state on button press. */
+
   xTaskCreate(task_uart, "UART", 256, NULL, 7, NULL);
   xTaskCreate(task_print, "PRINT", 256, NULL, 5, NULL);
   xTaskCreate(task_encoder, "ENCODER", 256, NULL, 6, NULL);
