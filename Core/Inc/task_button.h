@@ -1,8 +1,13 @@
-/*
- * task_button.h
+/**
+ * @file    task_button.h
+ * @brief   Public interface for the button task.
  *
- *  Created on: 25 mars 2026
- *      Author: remyd
+ * @details Exposes task_button() entry point.
+ *          Pressing B1 (PC13) triggers an EXTI ISR that wakes task_button
+ *          via xSemaphoreButton, displaying the current system state over UART.
+ *
+ * @author  remyd
+ * @date    25 mars 2026
  */
 
 #ifndef INC_TASK_BUTTON_H_
