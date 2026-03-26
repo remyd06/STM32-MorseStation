@@ -28,7 +28,8 @@ void	set_buffer_encoder(char	*encoder_buffer)
 
 void	task_encoder(void *argument)
 {
-	char	encoder_buffer[64];
+	char		encoder_buffer[64];
+	uint8_t		historic_index = 0;
 
 	static const char	*morse_alphabet[] =
 	{
@@ -120,6 +121,18 @@ void	task_encoder(void *argument)
 			i++;
 		}
 		xQueueSend(xQueueLedAndSpeaker, &end, portMAX_DELAY);
+
+		if (historic_index == 3)
+			historic_index = 0;
+
+		xSemaphoreTake(xMutexStruct, portMAX_DELAY);
+
+		if (!encoder_buffer[0] && gLedAndSpeakerRunning)
+			strcpy(gState.HISTORIC[historic_index++], "/ERROR/");
+		else
+			strcpy(gState.HISTORIC[historic_index++], encoder_buffer);
+
+		xSemaphoreGive(xMutexStruct);
 
 	}
 }
